@@ -12,7 +12,8 @@
   </head>
 
   <body>
-
+    <%= render 'layouts/nav' %>
+    <%= render 'layouts/alert_zone' %>
     <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>
