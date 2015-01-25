@@ -2,6 +2,12 @@ Giant::Application.routes.draw do
 
   devise_for :users
 
+  namespace :admin do
+    resource :user_management, only: [:show]
+  end
+
+  resources :account_types, only: [:new, :create, :edit, :update, :destroy]
+
   root to: 'items#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
