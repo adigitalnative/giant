@@ -1,0 +1,5 @@
+<h2>Edit User</h2>
+<%= simple_form_for @user do |f| %>
+  <%= f.association :account_types %>
+  <%= f.submit %>
+<% end %>

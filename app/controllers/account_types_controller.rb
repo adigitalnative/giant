@@ -1,6 +1,7 @@
 class AccountTypesController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :admin_only
   before_filter :find_account_type, only: [:edit, :update, :destroy]
 
   def new

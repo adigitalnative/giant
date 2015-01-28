@@ -11,13 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150125231227) do
+ActiveRecord::Schema.define(:version => 20150126034605) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "user_account_types", :force => true do |t|
+    t.integer  "user_id",         :null => false
+    t.integer  "account_type_id", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "user_account_types", ["account_type_id"], :name => "index_user_account_types_on_account_type_id"
+  add_index "user_account_types", ["user_id"], :name => "index_user_account_types_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

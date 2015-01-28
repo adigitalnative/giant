@@ -1,3 +1,27 @@
+<div id="users">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Account Types</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr id="user_<%= user.id %>">
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone %></td>
+          <td><%= user.account_types_list %></td>
+          <td><%= link_to "Edit", edit_user_path(user.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <div id="account_types">
   <h3>Account Types <small><%= link_to "Add Account Type", new_account_type_path %></small></h3>
