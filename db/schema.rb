@@ -11,13 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150126034605) do
+ActiveRecord::Schema.define(:version => 20150128213227) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "item_type_assignments", :force => true do |t|
+    t.integer  "item_type_id", :null => false
+    t.integer  "item_id",      :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "item_type_assignments", ["item_id"], :name => "index_item_type_assignments_on_item_id"
+  add_index "item_type_assignments", ["item_type_id"], :name => "index_item_type_assignments_on_item_type_id"
+
+  create_table "item_types", :force => true do |t|
+    t.string   "name",       :default => "", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "items", :force => true do |t|
+    t.string   "name",                           :null => false
+    t.text     "description",                    :null => false
+    t.integer  "user_id",                        :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "archived",    :default => false, :null => false
+  end
+
+  add_index "items", ["user_id"], :name => "index_items_on_user_id"
 
   create_table "user_account_types", :force => true do |t|
     t.integer  "user_id",         :null => false

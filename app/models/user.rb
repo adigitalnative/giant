@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :user_account_types
   has_many :account_types, through: :user_account_types
 
+  has_many :items
+
   validates :first_name, presence: true
   validates :last_name, presence: true
 

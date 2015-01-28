@@ -8,6 +8,11 @@ Giant::Application.routes.draw do
 
   resources :account_types, only: [:new, :create, :edit, :update, :destroy]
   resources :users, only: [:edit, :update]
+  resource :inventory
+
+  resources :users do
+    resources :items, only: [:new, :create, :edit, :update, :destroy]
+  end
 
   root to: 'items#index'
   # The priority is based upon order of creation:

@@ -1,0 +1,6 @@
+<%= simple_form_for [@user, @item] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :archived, label: "Archive" %>
+  <%= f.submit %>
+<% end %>

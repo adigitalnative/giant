@@ -13,6 +13,11 @@ describe User do
     Factory.build(:user, last_name: nil).should_not be_valid
   end
 
+  it "can have items" do
+    user = Factory.build(:user)
+    user.items.class.should eq(Array)
+  end
+
   describe ".full_name" do
     before do
       @test_user = Factory(:user, first_name: "Jane", last_name: "Doe", email: "janedoe@mail.com", phone: "392-392-3992")

@@ -8,10 +8,15 @@ describe "A visitor" do
 end
 
 describe "A signed in user" do
+  it "cannot access the account type crud"
+end
+
+describe "A signed in admin user" do
   before do
-    @signed_in_user = Factory(:user, email: "signed_in_user@mail.com")
+    @signed_in_admin = Factory(:user, email: "signed_in_user@mail.com")
+    @signed_in_admin.account_types << Factory(:account_type, name: "Admin")
     visit root_path
-    fill_in "Email", with: @signed_in_user.email
+    fill_in "Email", with: @signed_in_admin.email
     fill_in "Password", with: "password"
     click_link_or_button "Sign in"
   end
