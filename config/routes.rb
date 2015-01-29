@@ -14,6 +14,12 @@ Hoard::Application.routes.draw do
     resources :items, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resource :warehouse
+
+  namespace :warehouse do
+    resources :items, only: [:show]
+  end
+
   root to: 'items#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,6 @@
+<div id="item">
+  <h2><%= @item.name %></h2>
+  <% if @item.belongs_to?(current_user) %>
+    <%= link_to "Edit", edit_user_item_path(@item.user_id, @item.id) %>
+  <% end %>
+</div>
