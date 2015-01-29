@@ -1,4 +1,4 @@
-Giant::Application.routes.draw do
+Hoard::Application.routes.draw do
 
   devise_for :users
 
