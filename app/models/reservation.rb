@@ -2,7 +2,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :item
   belongs_to :status
-  attr_accessible :end_date, :start_date
+  attr_accessible :end_date, :start_date, :status_id
 
   validates :user_id, presence: true
   validates :item_id, presence: true

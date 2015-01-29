@@ -5,4 +5,10 @@
   <% else %>
     <%= link_to "Reserve Item", new_item_reservation_path(@item.id) %>
   <% end %>
+
+  <div id="reservations">
+    <% @item.reservations.find_all_by_user_id(current_user.id).each do |request| %>
+      <p>Starts: <%= request.start_date %>, Ends: <%= request.end_date %>, Status: <%= request.status.name %></p>
+    <% end %>
+  </div>
 </div>
