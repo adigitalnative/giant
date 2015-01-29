@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   has_many :account_types, through: :user_account_types
 
   has_many :items
-
+  has_many :reservations
+  
   validates :first_name, presence: true
   validates :last_name, presence: true
 

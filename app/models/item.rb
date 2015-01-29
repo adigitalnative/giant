@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
 
   has_many :item_type_assignments
   has_many :item_types, through: :item_type_assignments
+  has_many :reservations
 
   validates :name, presence: true
   validates :description, presence: true

@@ -42,4 +42,10 @@ describe Item do
     end
 
   end
+
+  describe ".reservations" do
+    it "returns an array" do
+      Factory(:item).reservations.class.should eq(Array)
+    end
+  end
 end

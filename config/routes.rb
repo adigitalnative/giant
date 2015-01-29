@@ -20,6 +20,10 @@ Hoard::Application.routes.draw do
     resources :items, only: [:show]
   end
 
+  resources :items do
+    resources :reservations
+  end
+
   root to: 'items#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
