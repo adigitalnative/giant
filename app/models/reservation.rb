@@ -10,22 +10,20 @@ class Reservation < ActiveRecord::Base
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  # before_create :set_status_to_pending
+  before_validation :set_new_record_status_to_pending
 
-  # def set_status_to_pending
-  #   pending_status = Status.find_by_name("Pending")
-  #   status_id = pending_status.id
-  # end
+  private
 
-  # def initialize(attributes = {})
-  #   pending_status = Status.find_by_name("Pending")
-  #   if pending_status
-  #     # status_id = pending_status.id
-  #     super
-  #   else
-  #     pending_status = Status.create(name: "Pending")
-  #     status_id = pending_status.id
-  #     super
-  #   end
-  # end
+  def set_new_record_status_to_pending
+    if self.new_record?
+      pending_status = Status.find_by_name("Pending")
+      if pending_status
+        self.status_id = pending_status.id
+      else
+        pending_status = Status.create(name: "Pending")
+        self.status_id = pending_status.id
+      end
+    end
+  end
+
 end
