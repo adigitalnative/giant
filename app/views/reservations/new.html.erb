@@ -1,0 +1,7 @@
+<h2>Request an Item Reservation</h2>
+
+<%= simple_form_for [@item, @reservation] do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.submit %>
+<% end %>
