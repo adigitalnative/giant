@@ -1,4 +1,4 @@
-class InventoriesController < ApplicationController
+class HoardsController < ApplicationController
 
   before_filter :authenticate_user!
 

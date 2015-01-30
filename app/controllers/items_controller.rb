@@ -15,8 +15,8 @@ class ItemsController < ApplicationController
   def create
     @item = @user.items.build(params[:item])
     if @item.save
-      flash[:notice] = "Item added to your inventory"
-      redirect_to inventory_path
+      flash[:notice] = "Item added to your hoard"
+      redirect_to hoard_path
     else
       puts @item.item_types.inspect
       flash[:alert] = "Item not created"
@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
   def update
     if @item.update_attributes(params[:item])
       flash[:notice] = "Item updated"
-      redirect_to inventory_path
+      redirect_to hoard_path
     else
       flash[:alert] = "Item not updated"
       render 'edit'
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.delete
     flash[:notice] = "Item deleted"
-    redirect_to inventory_path
+    redirect_to hoard_path
   end
 
   private

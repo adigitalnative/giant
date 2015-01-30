@@ -62,4 +62,10 @@ describe User do
       test_user.roles.include?(account_type.name).should be_true
     end
   end
+
+  describe ".reservations" do
+    it "returns an array" do
+      Factory(:user).reservations.class.should eq(Array)
+    end
+  end
 end
