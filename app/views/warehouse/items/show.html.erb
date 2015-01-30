@@ -10,7 +10,12 @@
 
     <% if @item.user == current_user %>
       <% @item.reservations.each do |reservation| %>
-        <p id="reservation_<%= reservation.id %>">Starts: <%= reservation.start_date %>, Ends: <%= reservation.end_date %>, Status: <%= reservation.status.name %> <%= link_to "Manage", edit_item_reservation_path(@item.id, reservation.id), class: "button tiny" %></p>
+        <p id="reservation_<%= reservation.id %>">
+          Starts: <%= reservation.start_date %>, Ends: <%= reservation.end_date %>, Status: <%= reservation.status.name %>
+          <% if reservation.status.name == "Pending" %>
+            <%= link_to "Manage", edit_item_reservation_path(@item.id, reservation.id), class: "button tiny" %>
+          <% end %>
+          </p>
       <% end %>
     <% else %>
       <% @item.reservations.find_all_by_user_id(current_user.id).each do |reservation| %>

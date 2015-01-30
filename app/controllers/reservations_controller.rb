@@ -42,10 +42,17 @@ class ReservationsController < ApplicationController
   def update
     @item = Item.find(params[:item_id])
     @reservation = @item.reservations.find(params[:id])
-
     if @reservation.update_attributes(params[:reservation])
-      flash[:notice] = "Reservation request updated"
-      redirect_to warehouse_item_path(@item.id)
+      if @reservation.status.name == "Approved"
+        flash[:notice] = "Reservation request approved"
+        redirect_to hoard_item_path(@item.id)
+      elsif @reservation.status.name == "Denied"
+        flash[:notice] = "Reservation request denied"
+        redirect_to hoard_item_path(@item.id)
+      else
+        flash[:notice] = "Reservation request updated"
+        redirect_to warehouse_item_path(@item.id)
+      end
     end
   end
 

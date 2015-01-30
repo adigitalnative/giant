@@ -1,5 +1,10 @@
 <%= simple_form_for [@item, @reservation] do |f| %>
   <%= f.input :start_date %>
   <%= f.input :end_date %>
-  <%= f.submit "Submit Request" %>
+  <% if @item.user_id == current_user.id %>
+    <%= f.association :status %>
+    <%= f.submit "Update Reservation" %>
+  <% else %>
+    <%= f.submit "Submit Request" %>
+  <% end %>
 <% end %>
