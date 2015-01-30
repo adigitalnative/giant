@@ -7,8 +7,15 @@
   <% end %>
 
   <div id="reservations">
-    <% @item.reservations.find_all_by_user_id(current_user.id).each do |request| %>
-      <p>Starts: <%= request.start_date %>, Ends: <%= request.end_date %>, Status: <%= request.status.name %></p>
+
+    <% if @item.user == current_user %>
+      <% @item.reservations.each do |reservation| %>
+        <p id="reservation_<%= reservation.id %>">Starts: <%= reservation.start_date %>, Ends: <%= reservation.end_date %>, Status: <%= reservation.status.name %> <%= link_to "Manage", edit_item_reservation_path(@item.id, reservation.id), class: "button tiny" %></p>
+      <% end %>
+    <% else %>
+      <% @item.reservations.find_all_by_user_id(current_user.id).each do |reservation| %>
+        <p id="reservation_<%= reservation.id %>">Starts: <%= reservation.start_date %>, Ends: <%= reservation.end_date %>, Status: <%= reservation.status.name %></p>
+      <% end %>
     <% end %>
   </div>
 </div>
