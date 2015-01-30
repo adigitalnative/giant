@@ -8,7 +8,26 @@ describe "A visitor" do
 end
 
 describe "A signed in user" do
-  it "cannot access the account type crud"
+  before do
+    signed_in_user = Factory(:user, email: "signed_in_user@mail.com")
+    visit root_path
+    fill_in "Email", with: signed_in_user.email
+    fill_in "Password", with: "password"
+    click_link_or_button "Sign in"
+  end
+  describe "attempting to access the user management path" do
+    before do
+      visit admin_user_management_path
+    end
+
+    it "provides a good error message" do
+      within("#alert") { page.should have_content("only admin")}
+    end
+
+    it "redirects to the rooth path" do
+      current_path.should eq(root_path)
+    end
+  end
 end
 
 describe "A signed in admin user" do

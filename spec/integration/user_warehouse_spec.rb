@@ -63,11 +63,6 @@ describe "A signed in user" do
         visit warehouse_item_path(@other_user_item_one.id)
         within("#item") { page.should_not have_content("Edit") }
       end
-
-      describe "visiting the edit path for another user's item" do
-        it "redirects to the warehouse path"
-        it "gives a nice error message"
-      end
     end
     
   end

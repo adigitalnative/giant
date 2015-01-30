@@ -29,7 +29,9 @@ describe Reservation do
   end
 
   describe "when there is no 'pending' status in the system" do
-    it "creates a pending status and sets the reservations' status to pending by default"
+    it "creates a pending status and sets the reservations' status to pending by default" do
+      Factory(:reservation).status.name.should eq("Pending")
+    end
   end
 
 end
