@@ -10,6 +10,10 @@ Hoard::Application.routes.draw do
   resources :users, only: [:edit, :update]
   resource :hoard
 
+  namespace :hoard do
+    resource :item, only: [:show]
+  end
+
   resources :users do
     resources :items, only: [:new, :create, :edit, :update, :destroy]
   end

@@ -1,0 +1,14 @@
+<div id="reservations">
+  <h3>Reservations</h3>
+  <ul>
+    <% @item.reservations.each do |reservation| %>
+      <li id="reservation_<%= reservation.id %>">
+        <p><%= reservation.start_date %> - <%= reservation.end_date %>, requested by <%= reservation.user.full_name %>, status: <%= reservation.status.name %>
+            <% if reservation.status.name == "Pending" %>
+              <%= link_to "Manage", edit_item_reservation_path(@item.id, reservation.id) %>
+            <% end %>
+          </p>
+      </li>
+    <% end %>
+  </ul>
+</div>

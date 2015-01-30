@@ -1,0 +1,2 @@
+module Hoard::ItemsHelper
+end

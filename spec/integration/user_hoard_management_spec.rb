@@ -1,8 +1,14 @@
 require 'spec_helper'
 
 describe "A visitor to the site" do
-  it "requires login" do
+  it "requires login to see the hoard" do
     visit hoard_path
+    page.should have_content "need to sign in"
+  end
+
+  it "requires login to see a hoard item" do
+    item = Factory(:item)
+    visit hoard_item_path(item.id)
     page.should have_content "need to sign in"
   end
 end
@@ -43,6 +49,11 @@ describe "A signed in user" do
       within("#items") { page.should have_selector("#item_#{@item_three.id}")}
     end
 
+    it "can view a detail page for an item" do
+      within("#item_#{@item_one.id}") { click_link_or_button @item_one.name }
+      current_path.should eq(hoard_item_path(@item_one.id))
+    end
+
     it "can edit their items" do
       within("#item_#{ @item_one.id }") { click_link_or_button "Edit" }
       fill_in "Name", with: "New Name"
@@ -60,6 +71,22 @@ describe "A signed in user" do
       check "Archive"
       click_link_or_button "Update"
       within("#item_#{ @item_one.id }") { page.should have_content("Archived") }
+    end
+  end
+
+  describe "viewing another user's hoard_items" do
+    before do
+      other_user = Factory(:user, email: "other_user@mail.com")
+      item = Factory(:item, user_id: other_user.id)
+      visit hoard_item_path(item.id)
+    end
+
+    it "redirects to the user's own hoard" do
+      current_path.should eq(hoard_path)
+    end
+
+    it "shows an appropriate error message" do
+      within("#alert") { page.should have_content("not permitted to view someone else's hoard")}
     end
   end
 end
