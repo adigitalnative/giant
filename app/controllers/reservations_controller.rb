@@ -3,7 +3,12 @@ class ReservationsController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
-    @reservation = @item.reservations.new(params[:reservation])
+    if @item.user_id == current_user.id
+      flash[:alert] = "Sorry, you cannot make a reservation request for your own items"
+      redirect_to warehouse_item_path(@item.id)
+    else
+      @reservation = @item.reservations.new(params[:reservation])
+    end
   end
 
   def create
@@ -14,7 +19,8 @@ class ReservationsController < ApplicationController
       flash[:notice] = "Reservation request submitted"
       redirect_to warehouse_item_path(@item.id)
     else
-      raise "Fubar"
+      flash[:alert] = "Reservation not created"
+      render 'new'
     end
   end
 

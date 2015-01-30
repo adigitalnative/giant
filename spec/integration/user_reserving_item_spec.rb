@@ -93,6 +93,28 @@ describe "A signed in user" do
   end
 
   describe "viewing their own warehouse items" do
+    before do
+      @signed_in_user_item = Factory(:item, user_id: @signed_in_user.id)
+    end
+
+    it "does not have a link to the item" do
+      visit warehouse_item_path(@signed_in_user_item.id)
+      within("#item") { page.should_not have_link("Reserve Item") }
+    end
+
+    describe "creating a request for the item" do
+      before do
+        visit new_item_reservation_path(@signed_in_user_item)
+      end
+
+      it "alerts appropriately" do
+        within("#alert") { page.should have_content("Sorry, you cannot make a reservation request for your own items")}
+      end
+
+      it "redirects to the warehouse item path" do
+        current_path.should eq(warehouse_item_path(@signed_in_user_item.id))
+      end
+    end
 
   end
 end
