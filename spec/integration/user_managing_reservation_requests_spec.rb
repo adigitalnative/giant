@@ -30,6 +30,7 @@ describe "A signed in user with an item that has a pending reservation request" 
       current_path.should eq(edit_item_reservation_path(@reservation.item_id, @reservation.id))
     end
   end
+   
 
   # describe "on the hoard show for the item" do
   #   before do
