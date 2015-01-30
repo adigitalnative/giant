@@ -21,6 +21,7 @@ class Reservation < ActiveRecord::Base
         self.status_id = pending_status.id
       else
         pending_status = Status.create(name: "Pending")
+        Status.create([{ name: "Approved" }, { name: "Denied" }])
         self.status_id = pending_status.id
       end
     end

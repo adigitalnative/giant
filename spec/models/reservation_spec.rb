@@ -28,9 +28,19 @@ describe Reservation do
     end
   end
 
-  describe "when there is no 'pending' status in the system" do
+  describe "when it is the first reservation in the system" do
     it "creates a pending status and sets the reservations' status to pending by default" do
       Factory(:reservation).status.name.should eq("Pending")
+    end
+
+    it "creates an 'Accepted' status" do
+      Factory(:reservation)
+      Status.all.map { |status| status.name }.include?("Approved").should be_true
+    end
+
+    it "creates a 'Denied' status" do
+      Factory(:reservation)
+      Status.all.map { |status| status.name }.include?("Denied").should be_true
     end
   end
 
