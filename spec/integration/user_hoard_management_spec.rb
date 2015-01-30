@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "A visitor to the site" do
   it "requires login" do
-    visit inventory_path
+    visit hoard_path
     page.should have_content "need to sign in"
   end
 end
@@ -19,13 +19,13 @@ describe "A signed in user" do
   describe "creating an item" do
     it "succeeds with only required values" do
       item_type = Factory(:item_type, name: "A Test Item Type") 
-      visit inventory_path
+      visit hoard_path
       click_link_or_button "Add item"
       fill_in "Name", with: "A Name"
       fill_in "Description", with: "The super cool description"
       click_link_or_button "Create Item"
 
-      page.should have_content("Item added to your inventory")
+      page.should have_content("Item added to your hoard")
     end
   end
 
@@ -34,7 +34,7 @@ describe "A signed in user" do
       @item_one = Factory(:item, user_id: @signed_in_user.id)
       @item_two = Factory(:item, user_id: @signed_in_user.id)
       @item_three = Factory(:item, user_id: @signed_in_user.id)
-      visit inventory_path
+      visit hoard_path
     end
 
     it "can see a list of their items" do

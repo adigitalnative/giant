@@ -8,7 +8,7 @@ Hoard::Application.routes.draw do
 
   resources :account_types, only: [:new, :create, :edit, :update, :destroy]
   resources :users, only: [:edit, :update]
-  resource :inventory
+  resource :hoard
 
   resources :users do
     resources :items, only: [:new, :create, :edit, :update, :destroy]
